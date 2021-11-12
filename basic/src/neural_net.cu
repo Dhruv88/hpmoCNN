@@ -433,6 +433,8 @@ void NeuralNet::getLoss(void *X, int *y, double learning_rate, std::vector<float
     return;
   }
   *scalar_loss = computeLoss();
+  
+  cudaMalloc(&dlayer_input[num_layers], batch_size * num_classes * data_type_size);
 
   if (layer_type[num_layers - 1] == SOFTMAX) {
     // SoftmaxLayerParams *cur_params = (SoftmaxLayerParams *)params[num_layers - 1];
